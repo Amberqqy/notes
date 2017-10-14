@@ -1,8 +1,3 @@
-#一级标题
-###有序序列
-5. hahah
-6. papa
-7. jqr
 * 1. 标题的三种写法
 ***
 > # 一级标签
@@ -37,9 +32,9 @@
 2. **序列2**
 3. _序列3_
 ### 有序列表（类型二）
-3. 序列1
-4. 序列2
-5. 序列3
+2. 序列2
+4. 序列3
+5. 序列4
 >注意：有序列表是以最开始序号为起始点 随后依次增加
 ### 分割线
 >分割线可以由* - _（星号，减号，底线）这3个符号的至少3个符号表示，注意至少要3个，且不需要连  续
@@ -50,18 +45,20 @@ _ _ _
 #### 行内式
  [美少女](http://www.baidu.com)是谁？
 #### 参数式
- [name]:(http://www.baidu.com)
- [school]:(http://www.baidu.com)
- [二哈]:(http://www.baidu.com)
-
+ [name]: http://www.baidu.com/
+ [school]: http://www.baidu.com/
+ [二哈]: http://www.baidu.com/
  这里是[name],哈哈哈[school],[二哈]真饿
 #### 图片链接式
 ![图片](http://imgd1.soufunimg.com/viewimage/2017/02/16/220k/e7a848d194bd4b379503134cf46c142b/300x200c.jpg)
-[哈哈]:http://imgd1.soufunimg.com/viewimage/2017/02/16/220k/e7a848d194bd4b379503134cf46c142b/300x200c.jpg
+[哈哈]: http://imgd1.soufunimg.com/viewimage/2017/02/16/220k/e7a848d194bd4b379503134cf46c142b/300x200c.jpg
 参考式图片，这里是![哈哈]
 ## 代码框
 ### 单行代码直接用一个单反引号``：
 `<p><a href="#" title="">呀呀呀呀</a></p>`
 ### 多行代码就用三个单反引号```：
-```<p><a href="www.baidu.com"></a></p> <p><a href="www.baidu.com">爸爸去哪里了</a></p><p><a href="www.baidu.com">嗨！</a></p>
+```
+<p><a href="www.baidu.com"></a></p> 
+<p><a href="www.baidu.com">爸爸去哪里了</a></p>
+<p><a href="www.baidu.com">嗨！</a></p>
 ```
