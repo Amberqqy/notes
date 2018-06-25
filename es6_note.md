@@ -29,7 +29,7 @@ console.log(a);
 
 ```  
 
-2. 初始化项目  
+3. 初始化项目  
 打开终端，先用`npm init -y`初始化项目，然后就会在项目根目录下产生package.json文件，如下显示（默认值）：  
 ```
 {
@@ -47,11 +47,24 @@ console.log(a);
 
 ```  
 
-3. 全局安装Babel-cli  
+4. 全局安装Babel-cli  
 终端上输入命令： `npm install -g babel-cli`  
 尝试输入： `babel src/index.js -o dist/index.js`, 就会在dist文件夹下发现index.js。  
 
-4. 在package.json文件的scripts加上  
+5. 如果在index.js中代码没有传过来，就本地安装babel-preset-es2015 和 babel-cli。
+`npm install --save-dev babel-preset-es2015 babel-cli`    
+并新建文件.babelrc,并写入代码：  
+```
+{
+    "presets":[
+        "es2015"
+    ],
+    "plugins":[]
+}
+```  
+再次尝试输入： `babel src/index.js -o dist/index.js`即可。
+
+6. 在package.json文件的scripts加上  
 `"bulid": "webpack --mode development"`,即可使用npm run bulid 命令进行打包，然后`live-server`即可在浏览器中打开练习网页。  
 
 ### 新的声明方式  
@@ -233,6 +246,141 @@ console.log(list.next().value);//[2, "biubiu"]
 
 ### es6中的箭头函数和拓展  
 
+> 1. 箭头函数就是没有function关键字，而是一个类似箭头（=>）的函数。  
+> 2. 箭头函数作为匿名函数,是不能作为构造函数的,不能使用new。   
+> 3. 箭头函数不绑定arguments,取而代之用rest参数（…）解决。  
+> 4. **箭头函数本没有this，绑定后不再多变**  
+> 5. 根据上级的function中的this来做绑定,如果上级也是箭头函数，再上级查找，绑定以后就不再发生改变了,this不再多变。  
+> 6. 箭头函数没有原型属性，箭头函数不能当做Generator函数,不能使用yield关键字。 
+> 7. 箭头函数不能换行。如果在箭头函数中，方法体内如果是两句话，那就需要在方法体外边加上{}括号。  
+
+**this指向的总结：**  
+
+1. 箭头函数的this永远指向其上下文的 this，任何方法都改变不了其指向，如call(), bind(), apply()
+2. 普通函数的this指向调用它的那个对象。  
+
+### es6 数组的用法  
+
+**in的用法：**in是用来判断对象或者数组中是否存在某个值的。
+  
+```
+let obj={
+    a:'haha',
+    b:'have',
+    c: ''
+}
+console.log('a' in obj);  //true
+console.log('c' in obj);  //false
+```  
+
+**数组的遍历方法**  
+
+1. **forEach**  
+```
+let oo =['ko','lplp','嘻嘻'];
+oo.forEach((val,index)=>console.log(index,val))
+//0 "ko"
+//1 "lplp"
+//2 "嘻嘻"
+```
+forEach循环的特点是会自动省略为空的数组元素，相当于直接给我们筛空了。  
+
+2. **filter**,**some**,**map(起到一个替代的作用)**  
+```
+let oo =['ko','lplp','嘻嘻'];
+oo.filter(l=>console.log(l))
+oo.some(l=>console.log(l))
+//ko
+// lplp
+// 嘻嘻
+```  
+
+**数组转换成字符串**  
+
+1. **join（）方法**   
+```
+let oo =['ko','lplp','嘻嘻'];
+console.log(oo.join())//ko,lplp,嘻嘻
+```  
+join()方法就是在数组元素中间，加了一些间隔:  
+  
+`console.log(oo.join('|'))//ko|lplp|嘻嘻`
+
+2. **toString方法**  
+```
+let oo =['ko','lplp','嘻嘻'];
+console.log(oo.toString())//ko,lplp,嘻嘻
+```  
+
+### es6中的对象  
+
+**对象赋值**  
+
+```
+let name="qqy";
+let skill= 'web';
+var obj= {name,skill};
+console.log(obj); //{name: "qqy", skill: "web"}
+``` 
+
+**对象Key值构建**  
+```
+let key='skill';
+var obj={
+    [key]:'web'
+}
+console.log(obj.skill);//web  
+```
+我们从后台取出key值，就可以运用这种[]形式的做法进行对象的构建。  
+
+**自定义对象使用**  
+```
+var koko={
+    ki:function(a,b){
+        return a+b;
+    }
+}
+console.log(koko.ki(1,6))//7
+```
+
+**Object.is()对象比较**  
+```
+var obj1 = {name:'哈哈'};
+var obj2 = {name:'哈哈'};
+console.log(+0 === -0);  //true 
+console.log(NaN === NaN ); //false
+console.log(Object.is(+0,-0)); //false
+console.log(Object.is(NaN,NaN)); //true
+console.log(Object.is(obj1.name,obj2.name)); //true
+```
+'==='是完全等于，数据和类型完全一致，则相等。  
+'Object.is()'其行为与===基本一致，不过有两处不同：  
+1. +0不等于-0。  
+2. NaN等于自身。
+
+**Object.assign()**  
+```
+var a={a:'wo'};
+var b={b:'学习'};
+var c={c:'web'};
+ 
+let d=Object.assign(a,b,c)
+console.log(d);//{a: "wo", b: "学习", c: "web"}
+```  
+
+### Symbol在对象中的运用  
+
+Symbol,它的意思是全局标记。  
+声明：`var s = Symbol()` 
+```
+var obja = { name: 'qqy', skill: 'web' };
+var age = Symbol();
+obja[age] = 18;
+for (var item in obja) {
+    console.log(obja[item]);//qqy web
+}
+console.log(obja);{ name: 'qqy', skill: 'web',age: '18' }
+```
 
 
 
